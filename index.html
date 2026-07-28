@@ -3,12 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Há Kai</title>
+    <title>Proyecto Interactivo</title>
+    <!-- Importamos el componente model-viewer de Google para cuando decidas usarlo -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
+    <style>
+        /* Paleta de colores */
+        :root {
+            --off-white: #F2EDE6;
+            --terracota: #B8755F;
+            --burgundy: #5E2C34;
+            --marrom: #7A5D4E;
+        }
+
+        /* Estilos generales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--off-white);
+            color: var(--burgundy);
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth; /* Para que el botón de contacto baje suavemente */
+        }
+
+        /* Encabezado */
+        header {
+            background-color: var(--burgundy);
+            color: var(--off-white);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+        }
+
+        /* Contenedor principal con Grid para dividir en dos columnas */
+        .container {
+            max-width: 1100px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        /* Ajuste para pantallas pequeñas (celulares) */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        /* Sección de texto */
+        .text-section h2 {
+            color: var(--terracota);
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .text-section p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--marrom);
+            margin-bottom: 2rem;
+        }
+
+        /* Botón animado */
+        .btn {
+            background-color: var(--terracota);
+            color: var(--off-white);
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(184, 117, 95, 0.3);
+        }
+
+        .btn:hover {
+            background-color: var(--burgundy);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(94, 44, 52, 0.4);
+        }
+
+        /* Recuadro simulando el Modelo 3D */
+        .model-container {
+            background-color: white;
+            border: 3px dashed var(--terracota);
+            border-radius: 16px;
+            height: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--marrom);
+            position: relative;
+            box-shadow: 0 15px 30px rgba(122, 93, 78, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .model-container:hover {
+            transform: scale(1.02);
+            border-style: solid;
+        }
+
+        /* Etiqueta model-viewer oculta/preparada */
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            border-radius: 16px;
+            /* Descomentar cuando tengas el modelo: */
+            /* display: block; */
+            display: none; 
+        }
+
+        /* Sección de Contacto */
+        .contact-section {
+            background-color: var(--marrom);
+            color: var(--off-white);
+            padding: 5rem 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .contact-section h2 {
+            margin-bottom: 2.5rem;
+            font-size: 2.2rem;
+            color: var(--off-white);
+        }
+
+        .contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .contact-form input, .contact-form textarea {
+            padding: 1.2rem;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: var(--off-white);
+            color: var(--burgundy);
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--terracota);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .contact-form button {
+            background-color: var(--burgundy);
+            color: var(--off-white);
+            border: none;
+            padding: 1.2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: var(--terracota);
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 <body>
-    
-    <h1>Test de publicacion</h1>
-    <p>El fondo, los botones y el modelo 3D irán aquí.</p>
+
+    <header>
+        <h1>Proyecto Escolar</h1>
+    </header>
+
+    <main class="container">
+        <!-- Columna 1: Textos y Botones -->
+        <div class="text-section">
+            <h2>Explora nuestro diseño</h2>
+            <p>Bienvenido al visualizador. Aquí podrás interactuar con el diseño, rotarlo en cualquier dirección y hacer zoom para apreciar cada uno de los detalles.</p>
+            <!-- Este enlace lleva directamente a la sección de contacto abajo -->
+            <a href="#contacto" class="btn">Contáctanos</a>
+        </div>
+        
+        <!-- Columna 2: Espacio para el 3D -->
+        <div class="model-container" id="espacio-modelo">
+            <div id="placeholder-text">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--terracota); margin-bottom: 10px;">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                </svg>
+                <h3>Espacio para el Modelo 3D</h3>
+                <p style="font-size: 0.9rem;">Inserta aquí tu etiqueta &lt;model-viewer&gt;</p>
+            </div>
+            
+            <!-- Etiqueta lista para usarse. Solo cambia 'tu_modelo.glb' por el archivo real y cambia el display a block en el CSS -->
+            <model-viewer src="tu_modelo.glb" alt="Un modelo 3D" auto-rotate camera-controls></model-viewer>
+        </div>
+    </main>
+
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="contact-section">
+        <h2>Ponte en contacto con nosotros</h2>
+        <!-- Aquí puedes integrar Formspree poniendo su enlace en el atributo 'action' -->
+        <form class="contact-form" action="#" method="POST">
+            <input type="text" name="nombre" placeholder="Tu Nombre" required>
+            <input type="email" name="correo" placeholder="Tu Correo Electrónico" required>
+            <textarea name="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
+            <button type="submit">Enviar Mensaje</button>
+        </form>
+    </section>
 
 </body>
 </html>
